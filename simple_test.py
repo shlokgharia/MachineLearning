@@ -12,10 +12,12 @@ price_data = pd.read_csv('stock_prices_new.txt', sep=" ", header=None, names=["T
 # price_data.columns = ["Ticker Symbol", "Period Ending", "price_begin", "price_end"]
 price_data.set_index(['Ticker Symbol', 'Period Ending'])
 
+# print price_data
+
 df = cu.getDfFromExcel("fundamentals", "fundamentals")
 df['Period Ending'] = df['Period Ending'].map(lambda x: x.year)
 df.set_index(['Ticker Symbol', 'Period Ending'])
 
-result = pd.concat([df, price_data], axis=1)
-print result
+result = pd.merge(df, price_data, on=['Ticker Symbol', 'Period Ending'])
+print result.head(5)
 
