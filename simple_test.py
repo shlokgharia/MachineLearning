@@ -14,10 +14,23 @@ price_data.set_index(['Ticker Symbol', 'Period Ending'])
 
 # print price_data
 
-df = cu.getDfFromExcel("fundamentals", "fundamentals")
-df['Period Ending'] = df['Period Ending'].map(lambda x: x.year)
-df.set_index(['Ticker Symbol', 'Period Ending'])
+# df = cu.getDfFromExcel("fundamentals", "fundamentals")
+# df['Period Ending'] = df['Period Ending'].map(lambda x: x.year)
+# df.set_index(['Ticker Symbol', 'Period Ending'])
+#
+# result = pd.merge(df, price_data, on=['Ticker Symbol', 'Period Ending'])
+# print result.head(5)
 
-result = pd.merge(df, price_data, on=['Ticker Symbol', 'Period Ending'])
-print result.head(5)
 
+price_data = pd.read_csv('stock_prices_new.txt', sep=" ", header=None, names=["Ticker Symbol", "Period Ending", "price_begin", "price_end"])
+
+# get class label.
+price_data['precent_increase'] = (price_data['price_end'] - price_data['price_begin'])/price_data['price_begin']
+
+for index, row in price_data.iterrows():
+
+
+
+# ['precent_increase']
+def return_label(record):
+    return record['precent_increase']
