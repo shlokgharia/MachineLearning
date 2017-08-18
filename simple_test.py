@@ -47,6 +47,6 @@ for index, row in price_data.iterrows():
             label[index] = 1
         else:
             label[index] = -1
-print type(label)
+print (type(label))
 price_data['Class Label'] = pd.Series(label, index=price_data.index)
 price_data.to_excel('prices.xlsx',sheet_name='price', index = False)
